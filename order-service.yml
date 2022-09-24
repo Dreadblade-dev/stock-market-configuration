@@ -1,10 +1,10 @@
 app:
   postgresql:
     host: localhost
-    port: 5433
-    database: account_service
-    username: '{cipher}76ae101b09e91bc026990829c561fca7119a558a301c889a5865db4ab5560b9a766dfd91354a0cb1a07923a49456c689'
-    password: '{cipher}d950d8e6354b21b90f1c198998e7de1962ec5031532a1a21ac7f519e9e32135b'
+    port: 5434
+    database: order_service
+    username: '{cipher}15dd16d5baaa8f001fca91246c0f878f17870afd306d9879dba83a7f1106f1da3f9704925cbdd02fdf6bb43c77627d45'
+    password: '{cipher}86ee6027c412a8b535582a1619070fee979f79aa4d20df59024b9de12da8183a'
 
 spring:
   datasource:
