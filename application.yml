@@ -1,4 +1,7 @@
 app:
+  client:
+    stock-market-ng-app:
+      uri: http://localhost:4200
   auth-server:
     protocol: http
     host: localhost
@@ -29,6 +32,22 @@ app:
     port: 8761
     username: service
     password: '{cipher}a384013b4ba6dd92bd9cdae9c82321eddadb3d99400bb58e355e154fdb7b2824'
+  logstash:
+    host: localhost
+    port: 5000
+
+spring:
+  kafka:
+    bootstrap-servers: ${app.kafka.host}:${app.kafka.port}
+    producer:
+      properties:
+        spring.json.add.type.headers: false
+    consumer:
+      auto-offset-reset: earliest
+      properties:
+        isolation.level: read_committed
+  sleuth.enabled: false
+  zipkin.enabled: false
 
 eureka:
   instance:
@@ -41,3 +60,18 @@ eureka:
       defaultZone: ${app.eureka.protocol}://${app.eureka.username}:${app.eureka.password}@${app.eureka.host}:${app.eureka.port}/eureka
     healthcheck:
       enabled: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: distributed-tracing
+
+  sleuth:
+    enabled: true
+    traceId128: true
+    sampler:
+      probability: 1.0
+  zipkin:
+    enabled: true
+    sender.type: kafka
